@@ -5,15 +5,15 @@ import * as express from 'express';
 // env variable and use this middleware to protect against unwanted requests.
 // You will need to add ?webhookToken=[token] to your webhook's url then.
 const webhookVerification = (
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
 ) => {
-    if (req.query.webhookToken !== process.env.WEBHOOK_TOKEN) {
-        return res.sendStatus(403);
-    }
+  if (req.query.webhookToken !== process.env.WEBHOOK_TOKEN) {
+    return res.sendStatus(403);
+  }
 
-    return next();
+  return next();
 };
 
 export default webhookVerification;
