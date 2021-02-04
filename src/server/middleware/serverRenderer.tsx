@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as express from 'express';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter as Router } from 'react-router-dom';

@@ -1,34 +1,27 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import Features from 'shared/components/Features';
-import { setLocale } from 'store/app/actions';
-import { Locale } from 'store/app/types';
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const App: React.FC<any> = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
-  const handleLocaleChange = useCallback(
-    (e: React.FormEvent<HTMLButtonElement>) => {
-      dispatch(setLocale(e.currentTarget.value as Locale));
-    },
-    [dispatch],
-  );
+import Features from 'components/Features';
+import Layout from 'components/Layout';
+
+const Home: React.FC = () => {
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
 
   return (
-    <React.Fragment>
-      <Features />
-      <h2>{t('i18n-example')}</h2>
-      <p>
-        <button value="de_DE" onClick={handleLocaleChange}>
-          Deutsch
-        </button>
-        <button value="en_US" onClick={handleLocaleChange}>
-          English
-        </button>
-      </p>
-    </React.Fragment>
+    <>
+      {isAuthenticated ? (
+        <Layout>
+          <h2>Welcome {user?.name}</h2>
+          <Features />
+          <button onClick={() => logout({ returnTo: window.location.origin })}>
+            Log Out
+          </button>
+        </Layout>
+      ) : (
+        <button onClick={() => loginWithRedirect()}>Log In</button>
+      )}
+    </>
   );
 };
 
-export default App;
+export default Home;
