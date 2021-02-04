@@ -1,4 +1,3 @@
-// import * as React from 'react';
 import path from 'path';
 import express from 'express';
 import cors from 'cors';
@@ -6,7 +5,6 @@ import chalk from 'chalk';
 import manifestHelpers from 'express-manifest-helpers';
 import bodyParser from 'body-parser';
 import paths from '../../config/paths';
-// import { configureStore } from '../shared/store';
 import errorHandler from './middleware/errorHandler';
 import serverRenderer from './middleware/serverRenderer';
 import addStore from './middleware/addStore';
@@ -16,8 +14,6 @@ import { i18nextXhr, refreshTranslations } from './middleware/i18n';
 require('dotenv').config();
 
 const app = express();
-// const app = express.default();
-
 // Use Nginx or Apache to serve static assets in production or remove the if() around the following
 // lines to use the express.static middleware to serve assets for production (not recommended!)
 // if (process.env.NODE_ENV === 'development') {
